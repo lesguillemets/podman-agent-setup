@@ -1,29 +1,36 @@
 FROM quay.io/fedora/fedora
 
+# texlive, fonts
 RUN dnf install -y texlive-scheme-full \
 	google-noto-sans-cjk-fonts google-noto-serif-cjk-fonts google-noto-sans-jp-fonts \
 	pandoc-cli \
 	&& dnf clean all
+RUN dnf install -y mrsw-biz-udgothic-fonts-all mrsw-biz-udpgothic-fonts mrsw-biz-udmincho-fonts-all mrsw-biz-udpmincho-fonts && dnf clean all
 
 RUN dnf install -y \
-	git ssh vim neovim make cmake gcc clang gettext curl \
+	git ssh vim neovim make cmake gcc gcc-c++ clang gettext curl \
 	perl nkf \
-	gmp gmp-devel ncurses ncurses-compat-libs xz \
-	qpdf mupdf mupdf-libs \
 	openssl openssl-devel \
+	gmp gmp-devel ncurses ncurses-compat-libs xz \
 	ninja-build \
-	htop \
-	opencv \
-	inkscape ImageMagick libheif libheif-ffmpeg libheif-tools \
-	libavif-tools \
-	ripgrep fd-find git-delta \
-	hugo \
-	jq tree sqlite \
-	ShellCheck \
 	&& dnf clean all
 
-RUN dnf install -y mrsw-biz-udgothic-fonts-all mrsw-biz-udpgothic-fonts mrsw-biz-udmincho-fonts-all mrsw-biz-udpmincho-fonts && dnf clean all
-RUN dnf install -y yt-dlp && dnf clean all
+RUN dnf install -y \
+	nkf \
+	qpdf mupdf mupdf-libs \
+	opencv ffmpeg \
+	inkscape ImageMagick-heic libheif libheif-ffmpeg libheif-tools \
+	libavif-tools \
+	jq tree sqlite \
+	&& dnf clean all
+
+RUN dnf install -y \
+	htop \
+	ripgrep fd-find git-delta \
+	hugo \
+	ShellCheck \
+	yt-dlp \
+	&& dnf clean all
 
 RUN dnf install -y nodejs24-npm-bin yarnpkg \
 	&& dnf clean all
