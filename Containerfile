@@ -6,7 +6,7 @@ RUN dnf install -y texlive-scheme-full \
 	&& dnf clean all
 
 RUN dnf install -y \
-	git ssh vim make cmake gcc clang gettext curl \
+	git ssh vim neovim make cmake gcc clang gettext curl \
 	perl nkf \
 	gmp gmp-devel ncurses ncurses-compat-libs xz \
 	qpdf mupdf mupdf-libs \
@@ -14,11 +14,18 @@ RUN dnf install -y \
 	ninja-build \
 	htop \
 	opencv \
-	inkscape \
+	inkscape ImageMagick libheif libheif-ffmpeg libheif-tools \
+	libavif-tools \
 	ripgrep fd-find git-delta \
+	hugo \
+	jq tree sqlite \
+	ShellCheck \
 	&& dnf clean all
 
-RUN dnf install -y nodejs \
+RUN dnf install -y mrsw-biz-udgothic-fonts-all mrsw-biz-udpgothic-fonts mrsw-biz-udmincho-fonts-all mrsw-biz-udpmincho-fonts && dnf clean all
+RUN dnf install -y yt-dlp && dnf clean all
+
+RUN dnf install -y nodejs24-npm-bin yarnpkg \
 	&& dnf clean all
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -33,9 +40,6 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh 
 COPY --chown=0:0 uv.toml /etc/uv/uv.toml
 RUN cargo install --locked typst-cli
 RUN cargo install --locked starship
-
-RUN dnf install -y yt-dlp && dnf clean all
-RUN dnf install -y mrsw-biz-udgothic-fonts-all mrsw-biz-udpgothic-fonts mrsw-biz-udmincho-fonts-all mrsw-biz-udpmincho-fonts && dnf clean all
 
 RUN curl -fsSL https://claude.ai/install.sh  -o /tmp/claude.sh \
 	&& bash /tmp/claude.sh
