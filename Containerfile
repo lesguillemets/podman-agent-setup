@@ -1,4 +1,5 @@
-FROM quay.io/fedora/fedora
+ARG FEDORA_VERSION=45
+FROM quay.io/fedora/fedora:${FEDORA_VERSION}
 
 # texlive, fonts
 RUN dnf install -y texlive-scheme-full \

@@ -18,7 +18,7 @@ podman create -it \
 	--env CODEX_HOME=/agent-secrets/codex \
 	--env CLAUDE_CONFIG_DIR=/agent-secrets/claude \
 	--workdir /workspace \
-	localhost/agent-base:fedora44 \
+	localhost/agent-base:fedora45 \
 	/bin/bash
 #
 # --secret github-readonly,type=mount,mode=0400
