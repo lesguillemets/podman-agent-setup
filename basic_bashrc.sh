@@ -25,5 +25,5 @@ shopt -s histappend
 
 export EDITOR=vim
 
-
+export TZ='Asia/Tokyo'
 eval "$(starship init bash)"
