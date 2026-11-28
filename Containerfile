@@ -33,7 +33,7 @@ RUN dnf install -y \
 	yt-dlp \
 	&& dnf clean all
 
-RUN dnf install -y nodejs24-npm-bin yarnpkg \
+RUN dnf install -y nodejs-npm yarnpkg \
 	&& dnf clean all
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
